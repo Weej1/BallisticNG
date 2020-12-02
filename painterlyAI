@@ -1,0 +1,210 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyNF3X3N2QyADVL7T+c2XMdg",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Weej1/BallisticNG/blob/master/painterlyAI\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "a3ip6UMw0R69"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "h72s1Mk26j4V",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "e65c36c6-24e1-4d8e-b5ab-17ab6a522605"
+      },
+      "source": [
+        "# Clone the repository\n",
+        "!git clone https://github.com/luanfujun/deep-painterly-harmonization"
+      ],
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Cloning into 'deep-painterly-harmonization'...\n",
+            "remote: Enumerating objects: 623, done.\u001b[K\n",
+            "remote: Total 623 (delta 0), reused 0 (delta 0), pack-reused 623\u001b[K\n",
+            "Receiving objects: 100% (623/623), 89.35 MiB | 17.68 MiB/s, done.\n",
+            "Resolving deltas: 100% (183/183), done.\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "t6-_ChnK7F6I",
+        "outputId": "35323b61-c61b-478c-8139-fa82a26504d8"
+      },
+      "source": [
+        "cd deep-painterly-harmonization/"
+      ],
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "/content/deep-painterly-harmonization\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "joE3WVi01p1t",
+        "outputId": "a2719a22-b832-442c-f8bc-3cd7bbfe54a4"
+      },
+      "source": [
+        "!sh ./models/download_models.sh"
+      ],
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "--2020-12-02 19:06:47--  https://gist.githubusercontent.com/ksimonyan/3785162f95cd2d5fee77/raw/bb2b4fe0a9bb0669211cf3d0bc949dfdda173e9e/VGG_ILSVRC_19_layers_deploy.prototxt\n",
+            "Resolving gist.githubusercontent.com (gist.githubusercontent.com)... 151.101.0.133, 151.101.64.133, 151.101.128.133, ...\n",
+            "Connecting to gist.githubusercontent.com (gist.githubusercontent.com)|151.101.0.133|:443... connected.\n",
+            "HTTP request sent, awaiting response... 200 OK\n",
+            "Length: 5499 (5.4K) [text/plain]\n",
+            "Saving to: ‘VGG_ILSVRC_19_layers_deploy.prototxt’\n",
+            "\n",
+            "VGG_ILSVRC_19_layer 100%[===================>]   5.37K  --.-KB/s    in 0s      \n",
+            "\n",
+            "2020-12-02 19:06:47 (34.6 MB/s) - ‘VGG_ILSVRC_19_layers_deploy.prototxt’ saved [5499/5499]\n",
+            "\n",
+            "--2020-12-02 19:06:47--  https://bethgelab.org/media/uploads/deeptextures/vgg_normalised.caffemodel\n",
+            "Resolving bethgelab.org (bethgelab.org)... 46.38.232.246\n",
+            "Connecting to bethgelab.org (bethgelab.org)|46.38.232.246|:443... connected.\n",
+            "WARNING: cannot verify bethgelab.org's certificate, issued by ‘emailAddress=webmaster@bethgelab.org,CN=bethgelab.org,OU=Computational Vision and Neuroscience,O=University of Tuebingen\\\\, CIN,L=Tuebingen,ST=Baden-Wuerttemberg,C=DE’:\n",
+            "  Self-signed certificate encountered.\n",
+            "HTTP request sent, awaiting response... 200 OK\n",
+            "Length: 80099414 (76M) [text/plain]\n",
+            "Saving to: ‘vgg_normalised.caffemodel’\n",
+            "\n",
+            "vgg_normalised.caff 100%[===================>]  76.39M   612KB/s    in 67s     \n",
+            "\n",
+            "2020-12-02 19:07:55 (1.14 MB/s) - ‘vgg_normalised.caffemodel’ saved [80099414/80099414]\n",
+            "\n",
+            "--2020-12-02 19:07:55--  http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_19_layers.caffemodel\n",
+            "Resolving www.robots.ox.ac.uk (www.robots.ox.ac.uk)... 129.67.94.2\n",
+            "Connecting to www.robots.ox.ac.uk (www.robots.ox.ac.uk)|129.67.94.2|:80... connected.\n",
+            "HTTP request sent, awaiting response... 301 Moved Permanently\n",
+            "Location: https://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_19_layers.caffemodel [following]\n",
+            "--2020-12-02 19:07:56--  https://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_19_layers.caffemodel\n",
+            "Connecting to www.robots.ox.ac.uk (www.robots.ox.ac.uk)|129.67.94.2|:443... connected.\n",
+            "HTTP request sent, awaiting response... 200 OK\n",
+            "Length: 574671192 (548M)\n",
+            "Saving to: ‘VGG_ILSVRC_19_layers.caffemodel’\n",
+            "\n",
+            "VGG_ILSVRC_19_layer 100%[===================>] 548.05M  11.3MB/s    in 49s     \n",
+            "\n",
+            "2020-12-02 19:08:46 (11.2 MB/s) - ‘VGG_ILSVRC_19_layers.caffemodel’ saved [574671192/574671192]\n",
+            "\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "u_8vS4rw1DI5",
+        "outputId": "835adb93-4c85-4a6e-f5c2-97b55f6c740b"
+      },
+      "source": [
+        "!python3 gen_all.py"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Working on image idx =  0\n",
+            "Working on image idx =  1\n",
+            "Working on image idx =  2\n",
+            "Working on image idx =  3\n",
+            "Working on image idx =  4\n",
+            "Working on image idx =  5\n",
+            "Working on image idx =  6\n",
+            "Working on image idx =  7\n",
+            "Working on image idx =  8\n",
+            "Working on image idx =  9\n",
+            "Working on image idx =  10\n",
+            "Working on image idx =  11\n",
+            "Working on image idx =  12\n",
+            "Working on image idx =  13\n",
+            "Working on image idx =  14\n",
+            "Working on image idx =  15\n",
+            "Working on image idx =  16\n",
+            "Working on image idx =  17\n",
+            "Working on image idx =  18\n",
+            "Working on image idx =  19\n",
+            "Working on image idx =  20\n",
+            "Working on image idx =  21\n",
+            "Working on image idx =  22\n",
+            "Working on image idx =  23\n",
+            "Working on image idx =  24\n",
+            "Working on image idx =  25\n",
+            "Working on image idx =  26\n",
+            "Working on image idx =  27\n",
+            "Working on image idx =  28\n",
+            "Working on image idx =  29\n",
+            "Working on image idx =  30\n",
+            "Working on image idx =  31\n",
+            "Working on image idx =  32\n",
+            "Working on image idx =  33\n",
+            "Working on image idx =  34\n",
+            "th neural_gram.lua  -content_image data/0_naive.jpg   -style_image   data/0_target.jpg  -tmask_image   data/0_c_mask.jpg  -mask_image    data/0_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/0_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/0_naive.jpg  -style_image   data/0_target.jpg  -tmask_image   data/0_c_mask.jpg  -mask_image    data/0_c_mask_dilated.jpg  -cnnmrf_image  results/0_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 0 -wikiart_fn data/wikiart_output.txt  -output_image  results/0_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/1_naive.jpg   -style_image   data/1_target.jpg  -tmask_image   data/1_c_mask.jpg  -mask_image    data/1_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/1_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/1_naive.jpg  -style_image   data/1_target.jpg  -tmask_image   data/1_c_mask.jpg  -mask_image    data/1_c_mask_dilated.jpg  -cnnmrf_image  results/1_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 1 -wikiart_fn data/wikiart_output.txt  -output_image  results/1_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/2_naive.jpg   -style_image   data/2_target.jpg  -tmask_image   data/2_c_mask.jpg  -mask_image    data/2_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/2_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/2_naive.jpg  -style_image   data/2_target.jpg  -tmask_image   data/2_c_mask.jpg  -mask_image    data/2_c_mask_dilated.jpg  -cnnmrf_image  results/2_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 2 -wikiart_fn data/wikiart_output.txt  -output_image  results/2_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/3_naive.jpg   -style_image   data/3_target.jpg  -tmask_image   data/3_c_mask.jpg  -mask_image    data/3_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/3_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/3_naive.jpg  -style_image   data/3_target.jpg  -tmask_image   data/3_c_mask.jpg  -mask_image    data/3_c_mask_dilated.jpg  -cnnmrf_image  results/3_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 3 -wikiart_fn data/wikiart_output.txt  -output_image  results/3_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/4_naive.jpg   -style_image   data/4_target.jpg  -tmask_image   data/4_c_mask.jpg  -mask_image    data/4_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/4_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/4_naive.jpg  -style_image   data/4_target.jpg  -tmask_image   data/4_c_mask.jpg  -mask_image    data/4_c_mask_dilated.jpg  -cnnmrf_image  results/4_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 4 -wikiart_fn data/wikiart_output.txt  -output_image  results/4_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/5_naive.jpg   -style_image   data/5_target.jpg  -tmask_image   data/5_c_mask.jpg  -mask_image    data/5_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/5_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/5_naive.jpg  -style_image   data/5_target.jpg  -tmask_image   data/5_c_mask.jpg  -mask_image    data/5_c_mask_dilated.jpg  -cnnmrf_image  results/5_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 5 -wikiart_fn data/wikiart_output.txt  -output_image  results/5_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/6_naive.jpg   -style_image   data/6_target.jpg  -tmask_image   data/6_c_mask.jpg  -mask_image    data/6_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/6_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/6_naive.jpg  -style_image   data/6_target.jpg  -tmask_image   data/6_c_mask.jpg  -mask_image    data/6_c_mask_dilated.jpg  -cnnmrf_image  results/6_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 6 -wikiart_fn data/wikiart_output.txt  -output_image  results/6_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/7_naive.jpg   -style_image   data/7_target.jpg  -tmask_image   data/7_c_mask.jpg  -mask_image    data/7_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/7_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/7_naive.jpg  -style_image   data/7_target.jpg  -tmask_image   data/7_c_mask.jpg  -mask_image    data/7_c_mask_dilated.jpg  -cnnmrf_image  results/7_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 7 -wikiart_fn data/wikiart_output.txt  -output_image  results/7_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/8_naive.jpg   -style_image   data/8_target.jpg  -tmask_image   data/8_c_mask.jpg  -mask_image    data/8_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/8_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/8_naive.jpg  -style_image   data/8_target.jpg  -tmask_image   data/8_c_mask.jpg  -mask_image    data/8_c_mask_dilated.jpg  -cnnmrf_image  results/8_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 8 -wikiart_fn data/wikiart_output.txt  -output_image  results/8_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/9_naive.jpg   -style_image   data/9_target.jpg  -tmask_image   data/9_c_mask.jpg  -mask_image    data/9_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/9_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/9_naive.jpg  -style_image   data/9_target.jpg  -tmask_image   data/9_c_mask.jpg  -mask_image    data/9_c_mask_dilated.jpg  -cnnmrf_image  results/9_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 9 -wikiart_fn data/wikiart_output.txt  -output_image  results/9_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/10_naive.jpg   -style_image   data/10_target.jpg  -tmask_image   data/10_c_mask.jpg  -mask_image    data/10_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/10_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/10_naive.jpg  -style_image   data/10_target.jpg  -tmask_image   data/10_c_mask.jpg  -mask_image    data/10_c_mask_dilated.jpg  -cnnmrf_image  results/10_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 10 -wikiart_fn data/wikiart_output.txt  -output_image  results/10_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/11_naive.jpg   -style_image   data/11_target.jpg  -tmask_image   data/11_c_mask.jpg  -mask_image    data/11_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/11_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/11_naive.jpg  -style_image   data/11_target.jpg  -tmask_image   data/11_c_mask.jpg  -mask_image    data/11_c_mask_dilated.jpg  -cnnmrf_image  results/11_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 11 -wikiart_fn data/wikiart_output.txt  -output_image  results/11_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/12_naive.jpg   -style_image   data/12_target.jpg  -tmask_image   data/12_c_mask.jpg  -mask_image    data/12_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/12_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/12_naive.jpg  -style_image   data/12_target.jpg  -tmask_image   data/12_c_mask.jpg  -mask_image    data/12_c_mask_dilated.jpg  -cnnmrf_image  results/12_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 12 -wikiart_fn data/wikiart_output.txt  -output_image  results/12_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/13_naive.jpg   -style_image   data/13_target.jpg  -tmask_image   data/13_c_mask.jpg  -mask_image    data/13_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/13_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/13_naive.jpg  -style_image   data/13_target.jpg  -tmask_image   data/13_c_mask.jpg  -mask_image    data/13_c_mask_dilated.jpg  -cnnmrf_image  results/13_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 13 -wikiart_fn data/wikiart_output.txt  -output_image  results/13_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/14_naive.jpg   -style_image   data/14_target.jpg  -tmask_image   data/14_c_mask.jpg  -mask_image    data/14_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/14_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/14_naive.jpg  -style_image   data/14_target.jpg  -tmask_image   data/14_c_mask.jpg  -mask_image    data/14_c_mask_dilated.jpg  -cnnmrf_image  results/14_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 14 -wikiart_fn data/wikiart_output.txt  -output_image  results/14_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/15_naive.jpg   -style_image   data/15_target.jpg  -tmask_image   data/15_c_mask.jpg  -mask_image    data/15_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/15_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/15_naive.jpg  -style_image   data/15_target.jpg  -tmask_image   data/15_c_mask.jpg  -mask_image    data/15_c_mask_dilated.jpg  -cnnmrf_image  results/15_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 15 -wikiart_fn data/wikiart_output.txt  -output_image  results/15_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/16_naive.jpg   -style_image   data/16_target.jpg  -tmask_image   data/16_c_mask.jpg  -mask_image    data/16_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/16_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/16_naive.jpg  -style_image   data/16_target.jpg  -tmask_image   data/16_c_mask.jpg  -mask_image    data/16_c_mask_dilated.jpg  -cnnmrf_image  results/16_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 16 -wikiart_fn data/wikiart_output.txt  -output_image  results/16_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/17_naive.jpg   -style_image   data/17_target.jpg  -tmask_image   data/17_c_mask.jpg  -mask_image    data/17_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/17_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/17_naive.jpg  -style_image   data/17_target.jpg  -tmask_image   data/17_c_mask.jpg  -mask_image    data/17_c_mask_dilated.jpg  -cnnmrf_image  results/17_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 17 -wikiart_fn data/wikiart_output.txt  -output_image  results/17_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/18_naive.jpg   -style_image   data/18_target.jpg  -tmask_image   data/18_c_mask.jpg  -mask_image    data/18_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/18_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/18_naive.jpg  -style_image   data/18_target.jpg  -tmask_image   data/18_c_mask.jpg  -mask_image    data/18_c_mask_dilated.jpg  -cnnmrf_image  results/18_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 18 -wikiart_fn data/wikiart_output.txt  -output_image  results/18_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/19_naive.jpg   -style_image   data/19_target.jpg  -tmask_image   data/19_c_mask.jpg  -mask_image    data/19_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/19_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/19_naive.jpg  -style_image   data/19_target.jpg  -tmask_image   data/19_c_mask.jpg  -mask_image    data/19_c_mask_dilated.jpg  -cnnmrf_image  results/19_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 19 -wikiart_fn data/wikiart_output.txt  -output_image  results/19_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/20_naive.jpg   -style_image   data/20_target.jpg  -tmask_image   data/20_c_mask.jpg  -mask_image    data/20_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/20_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/20_naive.jpg  -style_image   data/20_target.jpg  -tmask_image   data/20_c_mask.jpg  -mask_image    data/20_c_mask_dilated.jpg  -cnnmrf_image  results/20_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 20 -wikiart_fn data/wikiart_output.txt  -output_image  results/20_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/21_naive.jpg   -style_image   data/21_target.jpg  -tmask_image   data/21_c_mask.jpg  -mask_image    data/21_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/21_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/21_naive.jpg  -style_image   data/21_target.jpg  -tmask_image   data/21_c_mask.jpg  -mask_image    data/21_c_mask_dilated.jpg  -cnnmrf_image  results/21_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 21 -wikiart_fn data/wikiart_output.txt  -output_image  results/21_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/22_naive.jpg   -style_image   data/22_target.jpg  -tmask_image   data/22_c_mask.jpg  -mask_image    data/22_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/22_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/22_naive.jpg  -style_image   data/22_target.jpg  -tmask_image   data/22_c_mask.jpg  -mask_image    data/22_c_mask_dilated.jpg  -cnnmrf_image  results/22_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 22 -wikiart_fn data/wikiart_output.txt  -output_image  results/22_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/23_naive.jpg   -style_image   data/23_target.jpg  -tmask_image   data/23_c_mask.jpg  -mask_image    data/23_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/23_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/23_naive.jpg  -style_image   data/23_target.jpg  -tmask_image   data/23_c_mask.jpg  -mask_image    data/23_c_mask_dilated.jpg  -cnnmrf_image  results/23_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 23 -wikiart_fn data/wikiart_output.txt  -output_image  results/23_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/24_naive.jpg   -style_image   data/24_target.jpg  -tmask_image   data/24_c_mask.jpg  -mask_image    data/24_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/24_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/24_naive.jpg  -style_image   data/24_target.jpg  -tmask_image   data/24_c_mask.jpg  -mask_image    data/24_c_mask_dilated.jpg  -cnnmrf_image  results/24_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 24 -wikiart_fn data/wikiart_output.txt  -output_image  results/24_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/25_naive.jpg   -style_image   data/25_target.jpg  -tmask_image   data/25_c_mask.jpg  -mask_image    data/25_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/25_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/25_naive.jpg  -style_image   data/25_target.jpg  -tmask_image   data/25_c_mask.jpg  -mask_image    data/25_c_mask_dilated.jpg  -cnnmrf_image  results/25_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 25 -wikiart_fn data/wikiart_output.txt  -output_image  results/25_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/26_naive.jpg   -style_image   data/26_target.jpg  -tmask_image   data/26_c_mask.jpg  -mask_image    data/26_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/26_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/26_naive.jpg  -style_image   data/26_target.jpg  -tmask_image   data/26_c_mask.jpg  -mask_image    data/26_c_mask_dilated.jpg  -cnnmrf_image  results/26_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 26 -wikiart_fn data/wikiart_output.txt  -output_image  results/26_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/27_naive.jpg   -style_image   data/27_target.jpg  -tmask_image   data/27_c_mask.jpg  -mask_image    data/27_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/27_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/27_naive.jpg  -style_image   data/27_target.jpg  -tmask_image   data/27_c_mask.jpg  -mask_image    data/27_c_mask_dilated.jpg  -cnnmrf_image  results/27_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 27 -wikiart_fn data/wikiart_output.txt  -output_image  results/27_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/28_naive.jpg   -style_image   data/28_target.jpg  -tmask_image   data/28_c_mask.jpg  -mask_image    data/28_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/28_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/28_naive.jpg  -style_image   data/28_target.jpg  -tmask_image   data/28_c_mask.jpg  -mask_image    data/28_c_mask_dilated.jpg  -cnnmrf_image  results/28_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 28 -wikiart_fn data/wikiart_output.txt  -output_image  results/28_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/29_naive.jpg   -style_image   data/29_target.jpg  -tmask_image   data/29_c_mask.jpg  -mask_image    data/29_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/29_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/29_naive.jpg  -style_image   data/29_target.jpg  -tmask_image   data/29_c_mask.jpg  -mask_image    data/29_c_mask_dilated.jpg  -cnnmrf_image  results/29_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 29 -wikiart_fn data/wikiart_output.txt  -output_image  results/29_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/30_naive.jpg   -style_image   data/30_target.jpg  -tmask_image   data/30_c_mask.jpg  -mask_image    data/30_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/30_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/30_naive.jpg  -style_image   data/30_target.jpg  -tmask_image   data/30_c_mask.jpg  -mask_image    data/30_c_mask_dilated.jpg  -cnnmrf_image  results/30_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 30 -wikiart_fn data/wikiart_output.txt  -output_image  results/30_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/31_naive.jpg   -style_image   data/31_target.jpg  -tmask_image   data/31_c_mask.jpg  -mask_image    data/31_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/31_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/31_naive.jpg  -style_image   data/31_target.jpg  -tmask_image   data/31_c_mask.jpg  -mask_image    data/31_c_mask_dilated.jpg  -cnnmrf_image  results/31_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 31 -wikiart_fn data/wikiart_output.txt  -output_image  results/31_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/32_naive.jpg   -style_image   data/32_target.jpg  -tmask_image   data/32_c_mask.jpg  -mask_image    data/32_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/32_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/32_naive.jpg  -style_image   data/32_target.jpg  -tmask_image   data/32_c_mask.jpg  -mask_image    data/32_c_mask_dilated.jpg  -cnnmrf_image  results/32_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 32 -wikiart_fn data/wikiart_output.txt  -output_image  results/32_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/33_naive.jpg   -style_image   data/33_target.jpg  -tmask_image   data/33_c_mask.jpg  -mask_image    data/33_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/33_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/33_naive.jpg  -style_image   data/33_target.jpg  -tmask_image   data/33_c_mask.jpg  -mask_image    data/33_c_mask_dilated.jpg  -cnnmrf_image  results/33_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 33 -wikiart_fn data/wikiart_output.txt  -output_image  results/33_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 && th neural_gram.lua  -content_image data/34_naive.jpg   -style_image   data/34_target.jpg  -tmask_image   data/34_c_mask.jpg  -mask_image    data/34_c_mask_dilated.jpg  -gpu 0 -original_colors 0 -image_size 700  -output_image  results/34_inter_res.jpg -print_iter 100 -save_iter 100 &&  th neural_paint.lua  -content_image data/34_naive.jpg  -style_image   data/34_target.jpg  -tmask_image   data/34_c_mask.jpg  -mask_image    data/34_c_mask_dilated.jpg  -cnnmrf_image  results/34_inter_res.jpg   -gpu 0 -original_colors 0 -image_size 700  -index 34 -wikiart_fn data/wikiart_output.txt  -output_image  results/34_final_res.jpg -print_iter 100 -save_iter 100  -num_iterations 1000 &\n",
+            "sh: 1: th: not found\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
